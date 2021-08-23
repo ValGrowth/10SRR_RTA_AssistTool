@@ -1,0 +1,61 @@
+LevelNo,SerialIdx,JpTitle,EnTitle,Reward,InLevelCoin,Cumulative,NeededCoin,Castle,LevelCommand(Next),TitlePictPath,AdditionalCoin,Remark
+1,1,坂道こえてゴールを目指せ！,A Downhill Battle,100,51,151,100,土台,下２,1.png,,
+3,1,"Hello, 3DWorld!","Hello, 3D World!",100,83,334,,,下１,3.png,,
+4,1,さばくの太陽 あっちこっち,Under the Angry Sun,150,101,585,400,西１F,下１,4.png,,
+5,1,行ったり来たり お化けやしき,The Mystery of the Haunted Manor,150,89,824,,,下１,5.png,,最後４回ブロック叩く
+6,1,地下室でコイン集めて,Underground Coin Collecting,200,40,1064,,,R１,6.png,,
+10,1,おくから登場！ マグナムキラー,Banzai Bill Ambush,150,68,1282,,,下１,10.png,,
+11,1,シーソーを かたむけて,Seesaw Catapults,150,75,1507,,,下１,11.png,,序盤6枚なし、２枚とる
+12,1,もぐってビックリ！ さかさマリオ,Tunnel to the Dark Side of the Moon,150,75,1732,600,本館１F,犬,12.png,,最初10コインとる、最後☆
+Dog1,1,つるつるにげ切れ ブランコクレーン,Swinging Claw Escape,200,97,2029,400,東１F,なし,Dog.png,,
+7,1,ブランコクレーンのアスレチック場,Swinging Claw Ropes Course,150,52,2231,,,下２,7.png,,最後☆
+9,1,4つのカギを求めて,The Keymaster,200,46,2477,,,R１,9.png,,右→左→中央
+13,1,敵か味方か？カロンのこうら,Dry Bones Shell Boating,150,97,2724,1200,本館２F,下１,13.png,,
+14,1,とびあがれ！たつまきさばく,Twisting Through the Desert Sands,150,94,2968,,,下１,14.png,,
+15,1,ぬき足 さし足 ジャンプなし,No Jumping Allowed!,200,81,3249,,,R１,15.png,,最後20コイン取らない
+19,1,大漁！ プクプクの海,Plenty of Cheep Cheeps in the Sea,150,101,3500,,,下１,19.png,,
+20,1,たんけん！ ファイアクッパクラウン,Fire Koopa Clown Carnage,150,60,3710,,,緑キノ,20.png,,序盤10コインなし
+Green,1,ジュゲムの雲で 気分はヘヴン,Head in the Clouds,0,27,3737,,,赤キノ,Green.png,,
+Red,1,重たい石材 よっこらしょ,Heavy Stone Heave-Ho,0,22,3759,,,青キノ,Red.png,,最後1up
+Blue,1,まいごのキノピオをさがして,Little Toad Lost,0,41,3800,1100,東２F（右端）,下２,Blue.png,,15枚までリカバリ可能(きのこヒップと最後)
+21,1,スネークブロックで空の旅,Snake Blocks in the Sky,150,24,3974,,,下２,21.png,,
+35,1,木のぼりマスターへの道,Master of the Trees,100,49,4123,,,R１下１,37.png,,10コインとる、木の右の２コイン無視、ブロック１コイン無視
+38,1,いそいで進め！ アリへいランド,Ant Trooper March,150,82,4355,,,下１,38.png,,
+39,1,ファイアクッパJr.クラウンの 夜間飛行,Fly-by-Night Clown Car,150,77,4582,500,東ドア（右から２番目）,下１,39.png,,アイテム上３コインとる
+56,1,守って！ メット・ザ・ライド,Buzzy: The Movie: The Book: The Ride,150,200,4932,,,なし,56.png,,
+56,2,守って！ メット・ザ・ライド,Buzzy: The Movie: The Book: The Ride,0,200,5132,,,なし,56.png,,
+56,3,守って！ メット・ザ・ライド,Buzzy: The Movie: The Book: The Ride,0,200,5332,,,なし,56.png,,
+56,4,守って！ メット・ザ・ライド,Buzzy: The Movie: The Book: The Ride,0,200,5532,,,なし,56.png,,
+56,5,守って！ メット・ザ・ライド,Buzzy: The Movie: The Book: The Ride,0,200,5732,,,下１,56.png,,
+57,1,深海の100枚コイン,100 Coins Under the Sea,150,110,5992,1100,西２F,R２下１,56.png,,
+60,1,ふわふわジャンプで雲の上,Above the Clouds,150,55,6197,,,L３下４,57.png,,走り抜けて1枚無視
+29,1,にげてにげて！ くさったキノコ,"Begone, Rotten Mushroom!",200,69,6466,,,下１,60.png,,
+30,1,足元注意！ てんめつブロック,Blink Blank Blunk,150,140,6756,,,R１下２,29.png,,
+33,1,ダッシュでON/OFFスイッチ,"Dash on, Dash off",300,25,7081,1400,西キャ改行東キャ（右端）,R２,30.png,,
+43,1,ランタンと共に,With a Lantern,200,76,7357,500,西ドア,下１,33.png,,最後2コイン取らない
+44,1,みんなでボヨヨン 雲の中,Bouncing Through the Clouds,200,56,7613,,,下１,43.png,,余分にとらない、ゴールバー取らない
+45,1,にげ切れ！ せりあがる溶岩,Lava Rising,200,159,7972,,,下１,44.png,,
+46,1,テッペキ＆カンペキ城,Impassable Castle,200,60,8232,,,下２,45.png,,
+48,1,溶岩にひそむカロンをたおせ！,Dry Bones Lava Lurker,150,11,8393,,,R１,46.png,,
+49,1,かけあがれ！ てんめつブロック,Blinking Block Blitz,150,146,8689,,,下１,48.png,,スタート地点の50コインとる
+50,1,くさったキノコ 大量発生！,Rotten Produce,200,47,8936,,,下１,49.png,,
+51,1,クッパクラウンでコイン集め,Koopa Clown Coin Collecting,150,60,9146,,,下２,50.png,,
+53,1,カベキックでやりすごせ！,Get Over It!,200,110,9456,,,R１,51.png,,
+55,1,ゴーゴー！ ノコノコカー,"Koopa Troopa Car, Go!",150,116,9722,,,左大砲,53.png,,
+Yamamura1,1,地に足をつけない飛行船,Airship Flight,200,125,10047,1000,西屋根,R１下１,55.png,,
+69,1,カベキックマスターへの道,The Road to Wall Jump Mastery,200,84,10331,1300,本３F,R１下２,69.png,,10コイン左側の8コイン無し
+70,1,ツララの雨を かけぬけて,Freezing Rain,200,80,10611,1000,東屋根,下２,70.png,,
+72,1,くつと雲の王国,Shoes in the Clouds,150,96,10857,,,R１,72.png,,30コインとる
+74,1,ゲッソー花火10連発,Blooper Barrage,200,27,11084,,,下２,74.png,,
+76,1,打ち上げボムへいでコイン集め,"Launching Bob-ombs, Collecting Co-coins",100,88,11272,,,下１,76.png,,
+77,1,運命は石材と共に,Stone of Destiny,300,57,11629,,,なし,77.png,,
+Rescue,1,キノピオとランデブー,Toad Rescue,0,74,11703,,,右のドア,Rescue.png,,
+Yamamura2,1,無人飛行船でコイン集め,Coin Collecting on an Unmanned Airship,200,55,11958,,,R1,80.png,,
+80,1,切りかえて ON/OFFスイッチのレール,On/Off Rail Switch,200,150,12308,1500,本屋根,L1,81.png,,
+67,1,ブンブンの 夜な夜なパーティー,Boom Boom Rager,200,121,12629,,,下１,67.png,,地下コインとる
+68,1,追って追われて マグナムキラー,Banzai Bill Chase Scene,200,123,12952,,,L1下1,68.png,,
+62,1,キケン！天然！フグマンネン,Threat Level: Porcupuffer,150,117,13219,,,下２,62.png,,両方とる
+64,1,こうそくスネークブロックでどこまでも,Fast Snake Block Frontier,200,63,13482,,,下２,64.png,,ヒップ10コイン無し
+66,1,パタメットを 乗りついで,Para-Beetle Transfer,300,23,13805,,,なし,66.png,,
+Eclipse,1,キノピオ全員、連れもどせ,Operation: Toadal Eclipse,0,140,13945,,,Y 下５,Eclipse.png,,
+22,1,森の川の魚達,River Fish in the Forest,100,55,14100,2000,ステンドグラス,Y ZR L1下４,22.png,,十字コイン無し、１枚許容

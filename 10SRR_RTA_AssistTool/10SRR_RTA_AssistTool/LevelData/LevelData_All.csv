@@ -1,0 +1,121 @@
+LevelNo,SerialIdx,JpTitle,EnTitle,Reward,InLevelCoin,Cumulative,NeededCoin,Castle,LevelCommand(Next),TitlePictPath,AdditionalCoin,Remark
+1,1,坂道こえてゴールを目指せ！,A Downhill Battle,100,51,151,100,土台,下１,1.png,,
+2,1,使いこなせ！ON/OFFスイッチ,ON/OFF Switch Research Expedition,100,50,301,,,下１,2.png,,中盤４コインとらない
+3,1,"Hello, 3DWorld!","Hello, 3D World!",100,83,484,,,下１,3.png,,
+4,1,さばくの太陽 あっちこっち,Under the Angry Sun,150,101,735,600,本館１F（右１）,Y,4.png,,
+5,1,行ったり来たり お化けやしき,The Mystery of the Haunted Manor,150,86,971,,,,5.png,,ブロック１回だけ叩く
+6,1,地下室でコイン集めて,Underground Coin Collecting,200,40,1211,400,西１F,,6.png,,
+7,1,ブランコクレーンのアスレチック場,Swinging Claw Ropes Course,150,52,1413,,,,7.png,,
+8,1,くつくつ大作戦,Shoe-Stopper,100,60,1573,,,,8.png,,
+9,1,4つのカギを求めて,The Keymaster,200,33,1806,,,,9.png,,P持ち中央ルート
+10,1,おくから登場！ マグナムキラー,Banzai Bill Ambush,150,58,2014,,,,10.png,,10コインだけとらない
+11,1,シーソーを かたむけて,Seesaw Catapults,150,73,2237,,,,11.png,,序盤8枚なし
+12,1,もぐってビックリ！ さかさマリオ,Tunnel to the Dark Side of the Moon,150,65,2452,,,,12.png,,最初10コインとらない
+Dog1,1,つるつるにげ切れ ブランコクレーン,Swinging Claw Escape,200,97,2749,,,,Dog1.png,,
+Dog2,1,こうらでにげて！ せまる毒ぬま,Swamp Escape by Shell!,0,81,2830,,,,Dog2.png,,
+Dog3,1,ワンワンこわい,Chain Chomp Chiller,0,64,2894,1200,本館２F,,Dog3.png,,
+16,1,ファイアクッパJr.クラウンで うちまくれ！,That's One Hot Car!,200,51,3145,400,東１F,,16.png,,
+13,1,敵か味方か？カロンのこうら,Dry Bones Shell Boating,150,97,3392,,,,13.png,,
+14,1,とびあがれ！たつまきさばく,Twisting Through the Desert Sands,150,94,3636,,,,14.png,,
+15,1,ぬき足 さし足 ジャンプなし,No Jumping Allowed!,200,61,3897,,,,15.png,,最初の20コインもとらない、最後20コイン取らない
+17,1,ブランコクレーンでつかまえて,"Swing, Claw! Swing!",150,27,4074,,,,17.png,,ゴールポールとらない
+18,1,ファイアボールと 木のぼりと,Treetop Fireballs,100,84,4258,,,,18.png,,
+19,1,大漁！ プクプクの海,Plenty of Cheep Cheeps in the Sea,150,101,4509,,,,19.png,,
+20,1,たんけん！ ファイアクッパクラウン,Fire Koopa Clown Carnage,150,55,4714,,,,20.png,,全体的にコイン無視
+21,1,スネークブロックで空の旅,Snake Blocks in the Sky,150,24,4888,,,青キノ,21.png,,
+Blue,1,まいごのキノピオをさがして,Little Toad Lost,0,41,4929,,,赤キノ,Blue.png,,
+Red,1,重たい石材 よっこらしょ,Heavy Stone Heave-Ho,0,22,4951,,,緑キノ,Red.png,,
+Green,1,ジュゲムの雲で 気分はヘヴン,Head in the Clouds,0,27,4978,,,紫キノ１（黄キノ前）,Green.png,,
+Purple1,1,POWブロックで目を覚ませ！,POW Block Wake-Up Call,0,47,5025,,,黄キノ１,Purple1.png,,消しゴムに話しかける
+Yellow1,1,地下の岩場で 石材さがし,Buried Stones,0,15,5040,,,黄キノ２,Yellow1.png,,６枚の塊は無視する（危ないので）
+Yellow2,1,ネコマリオの石材運び,Cat-Scratch Stone,0,59,5099,,,黄キノ３,Yellow2.png,,最初の３枚とる
+Yellow3,1,川底の石材運び,Stone from the River,0,28,5127,,,消しゴム１,Yellow3.png,,キノコ取らない、ハテナブロックの上で投げて下から泳いでいく
+Eraser1,1,ふりかかるバブルを けちらせ！,Molten Rain,0,24,5151,,,消しゴム２,Eraser1.png,,１枚目コインをとるタイミングでダッシュ
+Eraser2,1,トゲゾーバスターズ,Spiny Busters,0,33,5184,,,消しゴム３,Eraser2.png,,
+Eraser3,1,たおせ！ プンプン1体,Target: A Single Pom Pom,0,40,5224,,,パーツ１,Eraser3.png,,
+Part1,1,ビックリブロックがつくる道,House of ! Blocks,0,17,5241,,,パーツ２,Part1.png,,
+Part2,1,お先 真っ暗！ くらやみの地下道,"Darkness Ahead, Darkness Below",0,62,5303,,,パーツ３,Part2.png,,10コインは棘棍棒の１枚だけとる
+Part3,1,ドッスンタワーの先に,High atop Thowmp Tower,0,118,5421,,,カエル１,Part3.png,,
+Frog1,1,生けるめいきゅう プクプクメイズ,Cheep Cheep Maze,0,34,5525,,,カエル２,Frog1.png,70,序盤の３枚は無視する（危ないので）
+Frog2,1,息つぎ きんし！,Hold Your Breath,0,32,5557,,,カエル３,Frog2.png,,
+Frog3,1,てんやわんやの海の中,Sea of Sorrow,0,29,5586,2200,西２F改行東２F（右端）,受付キノピオ,Frog3.png,,50コインとらない
+28,1,こうらをけって スイッチON！,The Way of the Shell,150,44,5780,,,,29.png,,
+29,1,にげてにげて！ くさったキノコ,"Begone, Rotten Mushroom!",200,69,6049,,,,30.png,,
+30,1,足元注意！ てんめつブロック,Blink Blank Blunk,150,140,6339,,,,31.png,,最初10コインとらない、最後カギドアとる
+31,1,ビュービュー谷の 奥深く,Deep in the Windy Valley,150,63,6552,,,,32.png,,10コインとる、出口手前の赤ノコ転がす
+32,1,ワナだらけ！ シーソーのとりで,Ancient Seesaw Fortress,200,122,6874,,,,33.png,,
+33,1,ダッシュでON/OFFスイッチ,"Dash on, Dash off",300,25,7199,,,,34.png,,
+34,1,マルマルジャンプで はねまくれ！,Bumper Jump Around!,150,48,7397,,,,35.png,,10コインとる、ブロック１コイン無視
+35,1,木のぼりマスターへの道,Master of the Trees,100,49,7546,,,,36.png,,サブエリアの10コインとらない
+36,1,さかさマリオとネッチー,Upside-Down Stretches,150,50,7746,,,,37.png,,
+37,1,ぐらぐらシーソーの城,Wobbly Seesaw Castle,200,71,8017,,,,38.png,,
+38,1,いそいで進め！ アリへいランド,Ant Trooper March,150,82,8249,,,,39.png,,アイテム上３コイン無視
+39,1,ファイアクッパJr.クラウンの 夜間飛行,Fly-by-Night Clown Car,150,74,8473,1300,本３F（右２）,,22.png,,十字コイン無し、１枚許容
+22,1,森の川の魚達,River Fish in the Forest,100,55,8628,1400,西キャ改行東キャ（右端）,,23.png,,最初の10コインとらない、ゴールはジャンプ
+23,1,空にのび?る つるの先,Above the Clouds,150,116,8894,1000,西ドア改行東ドア,,24.png,,左上の２コインとらない
+24,1,せんにゅう！ クリボーのおうち,Goomba Clubhouse,150,51,9095,,,,25.png,,音符ゾーンの10コインとらない、ゴール手前ツタの上とらない
+25,1,タワーテレサの お化けやしき,Boo's Towering House of Terror,150,71,9316,,,,26.png,,
+26,1,小さな星の大決戦,Big Showdown on a Little Star,150,44,9510,,,ヤマムラ１（西館大砲発射）,Rescue.png,,10コイン無視
+Rescue,1,キノピオとランデブー,Toad Rescue,0,62,9572,,,紫キノ２（西側）,Yamamura1.png,,最後のコイン無視
+Yamamura1,1,地に足をつけない飛行船,Airship Flight,200,80,9852,,,ヤマムラ２（東館ドア出入り）,Purple2.png,,
+Purple2,1,ふんでたおして のびのびパックン,Piranha Creeper Squash,0,20,9872,,,紫キノ３（西側）,Yamamura2.png,,
+Yamamura2,1,無人飛行船でコイン集め,Coin Collecting on an Unmanned Airship,200,55,10127,,,ヤマムラ３（犬小屋）,Purple3.png,,
+27,1,あかヨッシーのプクプクたいじ,Red Yoshi's Cheep Cheep Cleanup,100,59,10286,,,受付キノピオ,Yamamura3.png,,靴を脱ぎ、線が切れたところでジャンプ
+40,1,かいくぐれ！ 輪になるテレサ,Boo-ring Course,200,87,10573,,,,27.png,,
+41,1,地下に住む巨大生物,The Underground Menace,100,40,10713,,,,28.png,,最後10コインとらない
+42,1,守って！ スネークブロック,"Save Me, Snake Block!",150,70,10933,,,,40.png,,
+43,1,ランタンと共に,With a Lantern,200,76,11209,,,,41.png,,
+44,1,みんなでボヨヨン 雲の中,Bouncing Through the Clouds,200,56,11465,,,,42.png,,
+45,1,にげ切れ！ せりあがる溶岩,Lava Rising,200,159,11824,,,,43.png,,
+46,1,テッペキ＆カンペキ城,Impassable Castle,200,60,12084,,,,44.png,,
+47,1,海でもえる バブルトレイン,Lava Bubble Limbo,150,78,12312,,,,45.png,,
+48,1,溶岩にひそむカロンをたおせ！,Dry Bones Lava Lurker,150,11,12473,,,,46.png,,
+49,1,かけあがれ！ てんめつブロック,Blinking Block Blitz,150,145,12768,,,,47.png,,
+50,1,くさったキノコ 大量発生！,Rotten Produce,200,47,13015,,,,48.png,,
+51,1,クッパクラウンでコイン集め,Koopa Clown Coin Collecting,150,60,13225,,,,49.png,,
+52,1,進め！ くらやみのリフト,The Darkness Lifts,150,104,13479,,,,50.png,,
+53,1,カベキックでやりすごせ！,Get Over It!,200,110,13789,,,,51.png,,
+54,1,あぶない太陽,"Angry, Angry Sun",200,117,14106,,,,52.png,,
+55,1,ゴーゴー！ ノコノコカー,"Koopa Troopa Car, Go!",150,116,14372,,,,53.png,,
+56,1,守って！ メット・ザ・ライド,Buzzy: The Movie: The Book: The Ride,150,190,14712,,,,54.png,,
+57,1,深海の100枚コイン,100 Coins Under the Sea,150,110,14972,,,,55.png,,
+58,1,いそいでのぼれ！ たつまきどうくつ,Climbing Twister Cave,150,95,15217,,,,56.png,,ゴールバーとらない
+59,1,チョーゼツ砲台 乗り放題,The World's Greatest Cannon Ride,200,97,15514,,,,57.png,,
+60,1,ふわふわジャンプで雲の上,Above the Clouds,150,56,15720,,,,58.png,,竜巻階段の10コインとらない
+61,1,地の底を目指して,Dirty Donuts,150,70,15940,1500,本屋根（右１）,,59.png,,
+62,1,キケン！天然！フグマンネン,Threat Level: Porcupuffer,150,48,16138,2000,西屋根改行東屋根,,60.png,,
+63,1,うって切りかえ ON/OFFスイッチ,ON/OFF Switcheroo!,150,69,16357,,,,61.png,,最後の10コインとらない
+64,1,こうそくスネークブロックでどこまでも,Fast Snake Block Frontier,200,63,16620,,,,62.png,,両方とらない
+65,1,ドンドン進め！あかPOWブロック,Red POW Block on the Move,100,48,16768,,,,63.png,,
+66,1,パタメットを 乗りついで,Para-Beetle Transfer,300,23,17091,,,,64.png,,ヒップ10コインとらない
+Eclipse,1,キノピオ全員、連れもどせ,Operation: Toadal Eclipse,0,140,17231,,,,65.png,,
+67,1,ブンブンの 夜な夜なパーティー,Boom Boom Rager,200,115,17546,,,,66.png,,
+68,1,追って追われて マグナムキラー,Banzai Bill Chase Scene,200,123,17869,,,,Eclipse.png,,
+69,1,カベキックマスターへの道,The Road to Wall Jump Mastery,200,72,18141,,,,69.png,,最初10コインとらない改行地下上10コインとる、地下コインとる
+70,1,ツララの雨を かけぬけて,Freezing Rain,200,80,18421,,,,70.png,,
+71,1,ON/OFFスイッチでノコノコ運び,ON/OFF Koopa Troopas,150,50,18621,,,,71.png,,10コインの左とらない、最後のほうとらない
+72,1,くつと雲の王国,Shoes in the Clouds,150,66,18837,,,,72.png,,
+73,1,ふりそそぐバブルのお城,Lava Bubble Castle,150,97,19084,,,,73.png,,
+74,1,ゲッソー花火10連発,Blooper Barrage,200,15,19299,,,,74.png,,30コインとらない
+75,1,いいジュゲム わるいジュゲム,"Good Lakitu, Bad Lakitu",200,89,19588,,,,75.png,,
+76,1,打ち上げボムへいでコイン集め,"Launching Bob-ombs, Collecting Co-coins",100,88,19776,,,,76.png,,最初にジャンプしてとる以外コイン無視
+77,1,運命は石材と共に,Stone of Destiny,300,47,20123,,,,77.png,,
+78,1,ひえひえ！ ツラランド,Icicle Playground,150,44,20317,,,,78.png,,
+79,1,ピョンチュウマンション,Skipsqueak Towers,150,70,20537,,,,79.png,,最初の10コイン無視
+80,1,切りかえて ON/OFFスイッチのレール,On/Off Rail Switch,200,150,20887,,,,80.png,,
+81,1,飛ばないで 空の旅,Sail the Skies... Without Jumping,200,68,21155,,,,81.png,,サブエリア無視
+82,1,つる からまりし お城にて,Vines in the Castle,150,60,21365,2000,ステンドグラス,,82.png,,
+83,1,あかヨッシー ほのおのハイウェイ,Red Yoshi's Highway of Flames,150,38,21553,,,,67.png,,
+84,1,きせきを起こせ！ カロンこうら,Secret of the Dry Bones Shell,300,65,21918,,,,68.png,,
+85,1,ジャンプはダメよ！ の大雪原,No-Jump Snowfield!,200,81,22199,,,,83.png,,
+86,1,冬と春を行ったり来たり,Winter and Spring and Winter Again,150,27,22376,,,,84.png,,最後10コインとらない改行余裕があれば50コインも無視
+Meowser,1,決戦！ ネコクッパ,Meoswer Showdown!,0,225,22601,,,,85.png,,バネ上投げの10コインとらない改行２つ目のバネが真下に来た時
+Purple3,1,かぶれトゲゾー こわせブロック,Spiny Shell Smashers,0,145,22746,,,,86.png,,青リフトの後３段ジャンプ
+Yamamura3,1,ヤセタクテ 夏,Summer Shootout,0,40,22786,1000,ビルダー像×１,,Meowser.png,,ヒップ10コインとらない
+87,1,ドンとゆけ！ ドンケツ城,Bing Bang Boom in Bully Castle!,200,157,23143,,,,87.png,,ドンケツ左の30コインとらない改行３択は猫
+88,1,氷山のチョロプーファミリー,Monty Mole Iceberg Getaway,150,84,23377,,,,88.png,,
+89,1,びっくり！ からくり城,"Just a Normal, Everyday Castle",300,196,23873,,,,89.png,,
+90,1,無敵で走れ！ 風の大地,Invincible Windsprinter,300,54,24227,,,,90.png,,
+Peach1,1,レッツゴー！ ビルダーマリオ,"Let's Go, Builder Mario!",0,35,24262,,,,Peach1.png,,
+Peach2,1,新人キノピオ 大行進,March of the Rookie Toads,0,24,24286,9000,ビルダー像×９,,Peach2.png,,
+Peach3,1,スーパーマリオブラザーズ W1-1？,Super Mario Bros. W1-1?,0,0,24286,,,,Peach3.png,,

@@ -1,0 +1,9 @@
+SMM2 RTA Assist Tool
+Copyright (C) 2020 Val JP
+
+1. This software is free. It is allowed to do Personal use, or Commercial use.
+2. It is allowed to duplicate this software, and redistribute freely. However, it does not allowed to distribute what was modified.
+3. For any damage caused by this software, the author don't take responsiblity.
+4. In addition, this package contains the software "DirectShowLib-2005.dll" that is licensed based on the LGPL.
+   You will be able to duplicate or re-distribute, modify it according to the LGPL.
+
