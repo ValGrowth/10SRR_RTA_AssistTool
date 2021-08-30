@@ -10,9 +10,11 @@ using System.Windows.Forms;
 
 namespace TenSRR_RTA_AssistTool
 {
-	class IGTAnalyzer
+	class PopupAnalyzer
 	{
-		Color NUMBER_BLUE = new Color();
+		public enum SELECTION { NEXT, RESTART, NONE };
+
+		Color SELECTION_BLUE = new Color();
 
 		private const int ORIGINAL_WIDTH = 1920;
 		private const int ORIGINAL_HEIGHT = 1080;
@@ -23,36 +25,24 @@ namespace TenSRR_RTA_AssistTool
 		private const double NUM_RATE_THRESH = 0.9; // 数字検出で検出される一致度の下限
 		private const int ALLOWED_DIFF = 150; // 一致とみなされるための画素値の差の合計の上限(RGB画像を比較するとき)
 
-		// 数字画像は大きいもの*10と小さいもの*10と『10.00』の画像で合計21枚
-		private Bitmap[] mNumberImagesOriginal = new Bitmap[21]; // オリジナル数字画像
-		private FastBitmap[] mNumberImages = new FastBitmap[21]; // 数字画像
+		// 数字画像は合計10枚
+		private Bitmap[] mNumberImagesOriginal = new Bitmap[10]; // オリジナル数字画像
+		private FastBitmap[] mNumberImages = new FastBitmap[10]; // 数字画像
 		private List<List<List<Color>>> mNumRGBs = new List<List<List<Color>>>(); // 各数字画像の各ピクセルの色
 		private List<List<List<bool>>> mNumBinFlgs = new List<List<List<bool>>>(); // 各数字画像を２値画像に変換したときの各ピクセルが0か1か
-		private int[] mNumTotalPixel = new int[21]; // 各数字画像のピクセル数
-		private int[] mNumAllowPixel = new int[21]; // 各数字画像の許容ピクセル数
+		private int[] mNumTotalPixel = new int[10]; // 各数字画像のピクセル数
+		private int[] mNumAllowPixel = new int[10]; // 各数字画像の許容ピクセル数
 		private int mNumMaxHeight = 0; // 数字画像の最大の高さ
 		private int mNumMaxWidth = 0; // 数字画像の最大の幅
 
-		public IGTAnalyzer()
+		public PopupAnalyzer()
 		{
-			NUMBER_BLUE = Color.FromArgb(0, 0, 255);
+			SELECTION_BLUE = Color.FromArgb(0, 0, 255);
 			mNumMaxHeight = 0;
 			mNumMaxWidth = 0;
-			for (int i = 0; i < 21; ++i)
+			for (int i = 0; i < 10; ++i)
 			{
-				int number = -1;
-				string path = "";
-				if (i == 20)
-				{
-					number = 10;
-					path = "./Images/IGTNumbers/10.png";
-				}
-				else
-				{
-					number = i % 10;
-					string dir = (i < 10 ? "Big" : "Small");
-					path = "./Images/IGTNumbers/" + dir + "/" + number + ".png";
-				}
+				string path = "./Images/CourseNCourse/" + i + ".pig";
 				mNumberImagesOriginal[i] = new Bitmap(path);
 				mNumberImages[i] = new FastBitmap(mNumberImagesOriginal[i]);
 				mNumRGBs.Add(new List<List<Color>>());
@@ -75,18 +65,15 @@ namespace TenSRR_RTA_AssistTool
 						mNumBinFlgs[i][y].Add(flg);
 					}
 				}
-				if (number != 10)
-				{
-					mNumMaxHeight = Math.Max(mNumMaxHeight, mNumberImages[i].Height);
-					mNumMaxWidth = Math.Max(mNumMaxWidth, mNumberImages[i].Width);
-				}
+				mNumMaxHeight = Math.Max(mNumMaxHeight, mNumberImages[i].Height);
+				mNumMaxWidth = Math.Max(mNumMaxWidth, mNumberImages[i].Width);
 				mNumTotalPixel[i] = mNumberImages[i].Height * mNumberImages[i].Width / SCAN_INTERVAL2;
 				mNumAllowPixel[i] = (int)(mNumTotalPixel[i] * (1.0 - NUM_RATE_THRESH));
 			}
 		}
 
-		// コースNo.を取得する。
-		public double DetectIGT(FastBitmap gameImage)
+		// ポップアップの選択状態を取得する。
+		public SELECTION DetectSelection(FastBitmap gameImage)
 		{
 			// 解像度チェック
 			double xRate = (double)gameImage.Width / ORIGINAL_WIDTH;
@@ -97,98 +84,92 @@ namespace TenSRR_RTA_AssistTool
 			int ymin = -1;
 			int ymax = -1;
 
-			// TODO: 青い範囲をチェック
-			int chxmin = (int)(150 * xRate);
-			int chxmax = (int)(400 * xRate);
-			int chymin = (int)(100 * yRate);
-			int chymax = (int)(200 * yRate);
-			for (int y = chymin; y < chymax; y += (int)(5 * yRate))
+			// TODO: "次のコースへ"をチェック
+			xmin = (int)(150 * xRate);
+			xmax = (int)(400 * xRate);
+			ymin = (int)(100 * yRate);
+			ymax = (int)(200 * yRate);
+			SELECTION selection = SELECTION.NEXT;
+			for (int y = ymin; y < ymax; y += (int)(5 * yRate))
 			{
-				for (int x = chxmin; x < chxmax; x += (int)(5 * xRate))
+				for (int x = xmin; x < xmax; x += (int)(5 * xRate))
 				{
 					Color color = gameImage.GetPixel(x, y);
-					if (Math.Abs(color.R - NUMBER_BLUE.R)
-						+ Math.Abs(color.G - NUMBER_BLUE.G)
-						+ Math.Abs(color.B - NUMBER_BLUE.B)
+					if (Math.Abs(color.R - SELECTION_BLUE.R)
+						+ Math.Abs(color.G - SELECTION_BLUE.G)
+						+ Math.Abs(color.B - SELECTION_BLUE.B)
 						> ALLOWED_DIFF)
 					{
-						return -1;
+						selection = SELECTION.NONE;
+						break;
 					}
 				}
-			}
-
-			// TODO: 10秒かどうかチェック
-			xmin = (int)(800 * xRate);
-			xmax = (int)(1100 * xRate);
-			ymin = (int)(150 * yRate);
-			ymax = (int)(200 * yRate);
-
-			FastBitmap tenSecImage = mNumberImages[20];
-			int count = 0;
-			for (int y = ymin; y < ymax; y += (int)(2 * yRate))
-			{
-				for (int x = xmin; x < xmax; x += (int)(2 * xRate))
-				{
-					int diff = 0;
-					Color ac = tenSecImage.GetPixel(x, y);
-					Color bc = gameImage.GetPixel(x, y);
-					diff += Math.Abs(ac.R - bc.R);
-					diff += Math.Abs(ac.G - bc.G);
-					diff += Math.Abs(ac.B - bc.B);
-					if (diff >= ALLOWED_DIFF)
-					{
-						++count;
-						if (count > mNumAllowPixel[20])
-						{
-							break;
-						}
-					}
-				}
-				if (count > mNumAllowPixel[20])
+				if (selection == SELECTION.NONE)
 				{
 					break;
 				}
 			}
-			if (count <= mNumAllowPixel[20])
+			if (selection == SELECTION.NONE)
 			{
-				Console.WriteLine("IGT:10.00");
-				return 10.0;
+				// TODO: "再挑戦"をチェック
+				xmin = (int)(150 * xRate);
+				xmax = (int)(400 * xRate);
+				ymin = (int)(100 * yRate);
+				ymax = (int)(200 * yRate);
+				selection = SELECTION.RESTART;
+				for (int y = ymin; y < ymax; y += (int)(5 * yRate))
+				{
+					for (int x = xmin; x < xmax; x += (int)(5 * xRate))
+					{
+						Color color = gameImage.GetPixel(x, y);
+						if (Math.Abs(color.R - SELECTION_BLUE.R)
+							+ Math.Abs(color.G - SELECTION_BLUE.G)
+							+ Math.Abs(color.B - SELECTION_BLUE.B)
+							> ALLOWED_DIFF)
+						{
+							selection = SELECTION.NONE;
+							break;
+						}
+					}
+					if (selection == SELECTION.NONE)
+					{
+						break;
+					}
+				}
 			}
 
+			Console.WriteLine("SELECTION:" + selection);
+			return selection;
+		}
 
-			// TODO: IGT取得
+		// コースNo.を取得する。
+		public int DetectCourseNo(FastBitmap gameImage)
+		{
+			// 解像度チェック
+			double xRate = (double)gameImage.Width / ORIGINAL_WIDTH;
+			double yRate = (double)gameImage.Height / ORIGINAL_HEIGHT;
+
+			int xmin = -1;
+			int xmax = -1;
+			int ymin = -1;
+			int ymax = -1;
+
+			// TODO: コース番号取得
 			xmin = (int)(900 * xRate);
 			xmax = (int)(1100 * xRate);
 			ymin = (int)(525 * yRate);
 			ymax = (int)(575 * yRate);
 
-			FastBitmap[] decimalNumberImages = new FastBitmap[10];
-			for (int i = 0; i < 10; ++i)
-			{
-				decimalNumberImages[i] = mNumberImages[i];
-			}
-			int decimals = IdentifyNumbers(gameImage, decimalNumberImages, xmin, xmax, ymin, ymax);
+			int courseNo = IdentifyNumbers(gameImage, mNumberImages, xmin, xmax, ymin, ymax);
 
-			xmin = (int)(900 * xRate);
-			xmax = (int)(1100 * xRate);
-			ymin = (int)(525 * yRate);
-			ymax = (int)(575 * yRate);
+			Console.WriteLine("CourseNo:" + courseNo);
 
-			FastBitmap[] floatNumberImages = new FastBitmap[10];
-			for (int i = 0; i < 10; ++i)
-			{
-				floatNumberImages[i] = mNumberImages[10 + i];
-			}
-			int floats = IdentifyNumbers(gameImage, floatNumberImages, xmin, xmax, ymin, ymax);
-
-			Console.WriteLine("IGT:" + decimals + "." + floats.ToString("d2"));
-
-			if (decimals < 0 || floats < 0)
+			if (courseNo <= 0)
 			{
 				return -1;
 			}
 
-			return decimals + (floats * 0.01);
+			return courseNo;
 		}
 
 		// 数字列を識別する

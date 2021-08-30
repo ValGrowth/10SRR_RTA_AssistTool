@@ -13,8 +13,7 @@ namespace TenSRR_RTA_AssistTool
 	class VideoAnalyzer
 	{
 		private IGTAnalyzer mIGTAnalyzer = new IGTAnalyzer();
-		private CourseNumAnalyzer mCourseNumAnalyzer = new CourseNumAnalyzer();
-		private FailureAnalyzer mFailureAnalyzer = new FailureAnalyzer();
+		private PopupAnalyzer mPopupAnalyzer = new PopupAnalyzer();
 
 		private VideoGameState mVideoGameState = new VideoGameState();
 
@@ -27,7 +26,7 @@ namespace TenSRR_RTA_AssistTool
 			return mVideoGameState;
 		}
 
-		public void UpdateGameState(FastBitmap bitmap)
+		public void UpdateGameState(FastBitmap gameImage)
 		{
 			//タイマー止まる(not is running)
 			//↓
@@ -45,7 +44,7 @@ namespace TenSRR_RTA_AssistTool
 
 			if (mWaitingForLoad)
 			{
-				if (IsLoading(bitmap))
+				if (IsLoading(gameImage))
 				{
 					// ロード中
 					mVideoGameState.mIsLoading = true;
@@ -62,7 +61,7 @@ namespace TenSRR_RTA_AssistTool
 
 				long curTime = Timer.Instance.GetUnixTime(DateTime.Now);
 
-				double igt = mIGTAnalyzer.DetectIGT(bitmap);
+				double igt = mIGTAnalyzer.DetectIGT(gameImage);
 				if (igt < 0 || igt == 10.0) // IGT検出不可 or ゲーム開始前
 				{
 					mIGTStopTime = -1;
@@ -83,10 +82,10 @@ namespace TenSRR_RTA_AssistTool
 					}
 				}
 
-				FailureAnalyzer.SELECTION selection = mFailureAnalyzer.DetectSelection(bitmap);
-				if (selection != FailureAnalyzer.SELECTION.NONE)
+				PopupAnalyzer.SELECTION selection = mPopupAnalyzer.DetectSelection(gameImage);
+				if (selection != PopupAnalyzer.SELECTION.NONE)
 				{
-					int courseNo = mCourseNumAnalyzer.DetectCourseNo(bitmap);
+					int courseNo = mPopupAnalyzer.DetectCourseNo(gameImage);
 					if (courseNo > 0) // コース番号検出
 					{
 						if (mIGTStopTime < 0) // IGTが停止していない or ゲーム開始前
@@ -108,7 +107,7 @@ namespace TenSRR_RTA_AssistTool
 
 							if (curTime - mIGTStopTime >= 1000) // １秒以上経過している
 							{
-								if (selection == FailureAnalyzer.SELECTION.RESTART) // カーソルがRESTARTにある
+								if (selection == PopupAnalyzer.SELECTION.RESTART) // カーソルがRESTARTにある
 								{
 									mVideoGameState.mIsFailure = true;
 								}
@@ -129,6 +128,25 @@ namespace TenSRR_RTA_AssistTool
 				mIGTHistory.Add(new Tuple<long, double>(curTime, igt));
 			}
 
+		}
+
+		private bool IsLoading(FastBitmap gameImage)
+		{
+			// 画面全体がだいたい暗かったらロード中
+			const int THRESH = 50;
+			const int INTERVAL = 200;
+			for (int y = 0; y < gameImage.Height; y += INTERVAL)
+			{
+				for (int x = 0; x < gameImage.Width; x += INTERVAL)
+				{
+					Color color = gameImage.GetPixel(x, y);
+					if (color.R + color.G + color.B > THRESH)
+					{
+						return false;
+					}
+				}
+			}
+			return true;
 		}
 
 	}

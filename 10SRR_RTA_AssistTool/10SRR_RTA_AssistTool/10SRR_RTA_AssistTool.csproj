@@ -65,8 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AudioChecker.cs" />
-    <Compile Include="FailureAnalyzer.cs" />
-    <Compile Include="CourseNumAnalyzer.cs" />
+    <Compile Include="PopupAnalyzer.cs" />
     <Compile Include="FastBitmap.cs" />
     <Compile Include="ChooseDeviceWindow.cs">
       <SubType>Form</SubType>
