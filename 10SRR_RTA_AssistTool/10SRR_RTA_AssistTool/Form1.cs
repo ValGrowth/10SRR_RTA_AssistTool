@@ -17,9 +17,10 @@ namespace TenSRR_RTA_AssistTool
 	{
 
 		VideoChecker mVideoChecker = null;
-		//AudioChecker mAudioChecker = null;
+		AudioChecker mAudioChecker = null;
 
 		List<GameState> mGameStateHistory = new List<GameState>();
+		GameState.STATE mCurGamePlayState = GameState.STATE.NONE;
 
 		private IGraphBuilder graphBuilder; //基本的なフィルタグラフマネージャ
 		private ICaptureGraphBuilder2 captureGraphBuilder;//ビデオキャプチャ＆編集用のメソッドを備えたキャプチャグラフビルダ
@@ -30,12 +31,11 @@ namespace TenSRR_RTA_AssistTool
 
 		int result; //エラー判定用フラグ
 
-		private const int WS_CHILD = 0x40000000;
-		private const int WS_CLIPCHILDREN = 0x02000000;
-
 		public const int WM_GRAPHNOTIFY = 0x00008001;//DirectShowイベントの発生を表すWindows メッセージ.
 
 		public Color FONT_COLOR = Color.White;
+
+		private const bool USE_AUDIO = false;
 
 
 		public Form1()
@@ -45,11 +45,8 @@ namespace TenSRR_RTA_AssistTool
 
 		private async void Form1_Load(object sender, EventArgs e)
 		{
-			//DeathSetting.Instance.Initialize();
 			PropertyCache.Instance.Initialize();
 			Preferences.Instance.Initialize();
-			LevelManager.Instance.Initialize();
-			UpdateChartText();
 			bool ret = directShowInitialize();
 			if (!ret)
 			{
@@ -64,25 +61,6 @@ namespace TenSRR_RTA_AssistTool
 			}
 		}
 
-		private void UpdateChartText()
-		{
-			TextBox_Chart.Text = "";
-			foreach (List<string> line in LevelManager.Instance.mOriginalCsvData)
-			{
-				int count = 0;
-				foreach (string str in line)
-				{
-					if (count > 0)
-					{
-						TextBox_Chart.Text += ",";
-					}
-					TextBox_Chart.Text += str;
-					++count;
-				}
-				TextBox_Chart.Text += "\r\n";
-			}
-		}
-
 		public void ResetRun()
 		{
 			mGameStateHistory.Clear();
@@ -94,7 +72,10 @@ namespace TenSRR_RTA_AssistTool
 			try
 			{
 				mVideoChecker = new VideoChecker(this);
-				//mAudioChecker = new AudioChecker(this);
+				if (USE_AUDIO)
+				{
+					mAudioChecker = new AudioChecker(this);
+				}
 
 				//mVideoChecker.Test();
 
@@ -126,15 +107,19 @@ namespace TenSRR_RTA_AssistTool
 				bool ret = mVideoChecker.AddVideoFilters(graphBuilder, captureGraphBuilder);
 				if (!ret)
 				{
-					//SMMMessageBox.Show("エラー：映像入力デバイスが見つかりませんでした。\nプログラムを終了します。Error: Any video devices are not found.\n Closing this application.", SMMMessageBoxIcon.Error);
+					//MyMessageBox.Show("エラー：映像入力デバイスが見つかりませんでした。\nプログラムを終了します。Error: Any video devices are not found.\n Closing this application.", MyMessageBoxIcon.Error);
 					return false;
 				}
 
-				//ret = mAudioChecker.AddAudioFilters(graphBuilder, captureGraphBuilder);
-				//if (!ret) {
-				//	SMMMessageBox.Show("エラー：音声入力デバイスが見つかりませんでした。\nプログラムを終了します。Error: Any audio devices are not found.\n Closing this application.", SMMMessageBoxIcon.Error);
-				//	return false;
-				//}
+				if (USE_AUDIO)
+				{
+					ret = mAudioChecker.AddAudioFilters(graphBuilder, captureGraphBuilder);
+					if (!ret)
+					{
+						//MyMessageBox.Show("エラー：音声入力デバイスが見つかりませんでした。\nプログラムを終了します。Error: Any audio devices are not found.\n Closing this application.", MyMessageBoxIcon.Error);
+						return false;
+					}
+				}
 
 				// 7. プレビュー映像（レンダラフィルタの出力）の出力場所を設定する.
 
@@ -223,11 +208,11 @@ namespace TenSRR_RTA_AssistTool
 					mVideoChecker.CloseInterfaces();
 					mVideoChecker = null;
 				}
-				//if (mAudioChecker != null)
-				//{
-				//	mAudioChecker.CloseInterfaces();
-				//	mAudioChecker = null;
-				//}
+				if (mAudioChecker != null)
+				{
+					mAudioChecker.CloseInterfaces();
+					mAudioChecker = null;
+				}
 			}
 			catch (Exception e)
 			{
@@ -243,50 +228,51 @@ namespace TenSRR_RTA_AssistTool
 			{
 				mVideoChecker.update();
 			}
-			//if (mAudioChecker != null) {
-			//	mAudioChecker.update();
-			//}
-
-			if (mVideoChecker != null/* && mAudioChecker != null*/)
+			if (mAudioChecker != null)
 			{
+				mAudioChecker.update();
+			}
 
-				if (!CheckBox_Pause.Checked // ポーズ中でない
-					&& (mGameStateHistory.Count == 0 || mGameStateHistory[mGameStateHistory.Count - 1].GetCumulativeCoinNum() < LevelManager.Instance.mFinalNeededCoin)) // コインが足りない
+			if (mVideoChecker != null && (!USE_AUDIO || mAudioChecker != null))
+			{
+				if (!CheckBox_Pause.Checked) // ポーズ中でない
 				{
 					VideoGameState videoGameState = mVideoChecker.GetVideoGameState();
 
-					GameState curState = mGameStateHistory.Count == 0 ? null : mGameStateHistory[mGameStateHistory.Count - 1];
-
 					// コースのプレイ開始を検出した
-					if (curState == null || curState.GetState() == GameState.STATE.PLAYED)
+					if (mCurGamePlayState == GameState.STATE.NONE || mCurGamePlayState == GameState.STATE.PLAYED)
 					{
-						if (videoGameState.mLevelNo != "")
+						if (videoGameState.mIsLoading)
 						{
-							mGameStateHistory.Add(new GameState());
-							int lastAllSerialIdx = 0;
-							Dictionary<string, int> lastSerialIdx = new Dictionary<string, int>();
-							int lastCumulativeCoinNum = 0;
-							if (mGameStateHistory.Count >= 2)
-							{
-								GameState prev = mGameStateHistory[mGameStateHistory.Count - 2];
-								lastAllSerialIdx = prev.GetAllSerialIdx();
-								lastSerialIdx = prev.GetSerialIdx();
-								lastCumulativeCoinNum = prev.GetCumulativeCoinNum();
-							}
-							mGameStateHistory[mGameStateHistory.Count - 1].UpdateLevel(
-								videoGameState.mLevelNo, lastAllSerialIdx, lastSerialIdx, lastCumulativeCoinNum);
-							UpdateDisplay();
+							mCurGamePlayState = GameState.STATE.PLAYING;
 						}
 					}
-					else if (curState != null && curState.GetState() == GameState.STATE.PLAYING)
+					else if (mCurGamePlayState == GameState.STATE.PLAYING)
 					{
-						// 所持コイン枚数が変化した
-						if (videoGameState.mReward >= 0 || videoGameState.mInLevelCoinNum >= 0)
+						if (videoGameState.mCourseNo > 0)
 						{
-							SendKeyToSplit();
-							curState.UpdateCoin(videoGameState.mReward, videoGameState.mInLevelCoinNum);
-							UpdateDisplay();
+							GameState targetState = null;
+							foreach (GameState state in mGameStateHistory)
+							{
+								if (state.GetCourseNo() == videoGameState.mCourseNo)
+								{
+									targetState = state;
+									break;
+								}
+							}
+							if (targetState == null)
+							{
+								targetState = new GameState();
+								mGameStateHistory.Add(targetState);
+							}
+							targetState.UpdateState(videoGameState.mCourseNo, videoGameState.mIGT, videoGameState.isDeath());
+							mCurGamePlayState = GameState.STATE.PLAYED;
+							if (!videoGameState.isDeath() && videoGameState.mCourseNo % 10 == 0)
+							{
+								SendKeyToSplit();
+							}
 						}
+						UpdateDisplay();
 					}
 				}
 			}
@@ -297,7 +283,7 @@ namespace TenSRR_RTA_AssistTool
 		private void UpdateDisplay()
 		{
 			CheckBox_PreviewVideo.Checked = PropertyCache.Instance.mPreviewVideo == 1;
-			//CheckBox_PlayAudio.Checked = MainSetting.Instance.PlayAudio == 1;
+			CheckBox_PlayAudio.Checked = PropertyCache.Instance.mPlayAudio == 1;
 
 			Dictionary<string, Label> labels = new Dictionary<string, Label>();
 			labels.Add(Label_Idx1.Name, Label_Idx1);
@@ -521,8 +507,8 @@ namespace TenSRR_RTA_AssistTool
 
 		private void CheckBox_PlayAudio_CheckedChanged(object sender, EventArgs e)
 		{
-			//MainSetting.Instance.PlayAudio = CheckBox_PlayAudio.Checked ? 1 : 0;
-			//MainSetting.Instance.SaveToFile();
+			PropertyCache.Instance.mPlayAudio = CheckBox_PlayAudio.Checked ? 1 : 0;
+			PropertyCache.Instance.SaveToFile();
 		}
 
 		private void optionsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -552,7 +538,7 @@ namespace TenSRR_RTA_AssistTool
 
 		private void OutputCSV()
 		{
-			string fileName = DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + "SMM2AnyCoins.csv";
+			string fileName = DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_" + "10SRR_RTA.csv";
 			string[] header = GameState.CSV_HEADER;
 			int COLUMN_NUM = header.Length;
 
@@ -582,42 +568,42 @@ namespace TenSRR_RTA_AssistTool
 			}
 		}
 
-		private void LoadCSV()
-		{
-			// ファイル選択ウィンドウを開く
-
-			OpenFileDialog ofd = new OpenFileDialog();
-
-			// 設定する
-			ofd.FileName = "*.csv"; // はじめに「ファイル名」で表示される文字列を指定する
-			ofd.InitialDirectory = "";
-			ofd.Filter = "CSVファイル(*.csv)|*.csv|すべてのファイル(*.*)|*.*";
-			ofd.FilterIndex = 1; // [ファイルの種類]ではじめに選択されるものを指定する（1番目の「CSVファイル」が選択されているようにする）
-			ofd.Title = "開くファイルを選択してください"; // タイトルを設定する
-			ofd.RestoreDirectory = true; // ダイアログボックスを閉じる前に現在のディレクトリを記憶するようにする
-
-			//ダイアログを表示する
-			if (ofd.ShowDialog() == DialogResult.OK)
-			{
-				//OKボタンがクリックされたとき
-				Console.WriteLine(ofd.FileName);
-
-				List<List<string>> csvData = CsvReader.ReadCsv(ofd.FileName, true, true);
-
-				ResetRun();
-
-				foreach (List<string> line in csvData)
-				{
-					GameState state = new GameState();
-					state.SetFromCSVLine(line);
-					mGameStateHistory.Add(state);
-				}
-
-				UpdateDisplay();
-
-				Label_CSVMessage.Text = "Loaded. " + ofd.FileName;
-			}
-		}
+		//private void LoadCSV()
+		//{
+		//	// ファイル選択ウィンドウを開く
+		//
+		//	OpenFileDialog ofd = new OpenFileDialog();
+		//
+		//	// 設定する
+		//	ofd.FileName = "*.csv"; // はじめに「ファイル名」で表示される文字列を指定する
+		//	ofd.InitialDirectory = "";
+		//	ofd.Filter = "CSVファイル(*.csv)|*.csv|すべてのファイル(*.*)|*.*";
+		//	ofd.FilterIndex = 1; // [ファイルの種類]ではじめに選択されるものを指定する（1番目の「CSVファイル」が選択されているようにする）
+		//	ofd.Title = "開くファイルを選択してください"; // タイトルを設定する
+		//	ofd.RestoreDirectory = true; // ダイアログボックスを閉じる前に現在のディレクトリを記憶するようにする
+		//
+		//	//ダイアログを表示する
+		//	if (ofd.ShowDialog() == DialogResult.OK)
+		//	{
+		//		//OKボタンがクリックされたとき
+		//		Console.WriteLine(ofd.FileName);
+		//
+		//		List<List<string>> csvData = CsvReader.ReadCsv(ofd.FileName, true, true);
+		//
+		//		ResetRun();
+		//
+		//		foreach (List<string> line in csvData)
+		//		{
+		//			GameState state = new GameState();
+		//			state.SetFromCSVLine(line);
+		//			mGameStateHistory.Add(state);
+		//		}
+		//
+		//		UpdateDisplay();
+		//
+		//		Label_CSVMessage.Text = "Loaded. " + ofd.FileName;
+		//	}
+		//}
 
 		private void Button_CSVOutput_Click(object sender, EventArgs e)
 		{
@@ -626,7 +612,8 @@ namespace TenSRR_RTA_AssistTool
 
 		private void Button_CSVLoad_Click(object sender, EventArgs e)
 		{
-			LoadCSV();
+			Console.WriteLine("Loading CSV is not implemented.");
+			//LoadCSV();
 		}
 
 		[DllImport("user32.dll")]

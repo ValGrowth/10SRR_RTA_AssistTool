@@ -276,10 +276,7 @@ namespace TenSRR_RTA_AssistTool {
 
 		private void UpdateGameState(FastBitmap bitmap)
         {
-			mVideoGameState.mLevelNo = mVideoAnalyzer.DetectLevelNo(bitmap);
-			Tuple<int, int> coins = mVideoAnalyzer.DetectCoinNum(bitmap);
-			mVideoGameState.mReward = coins.Item1;
-			mVideoGameState.mInLevelCoinNum = coins.Item2;
+			mVideoGameState = mVideoAnalyzer.Detect(bitmap);
 		}
 
 		public VideoGameState GetVideoGameState()
