@@ -21,7 +21,7 @@ namespace TenSRR_RTA_AssistTool
 		private static DateTime UNIX_EPOCH =
           new DateTime(1970, 1, 1, 0, 0, 0, 0);
 
-        public static long GetUnixTime(DateTime targetTime)
+        public long GetUnixTime(DateTime targetTime)
         {
             // UTC時間に変換
             targetTime = targetTime.ToUniversalTime();

@@ -65,6 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AudioChecker.cs" />
+    <Compile Include="FailureAnalyzer.cs" />
+    <Compile Include="CourseNumAnalyzer.cs" />
     <Compile Include="FastBitmap.cs" />
     <Compile Include="ChooseDeviceWindow.cs">
       <SubType>Form</SubType>
@@ -74,6 +76,7 @@
     </Compile>
     <Compile Include="CsvReader.cs" />
     <Compile Include="GameState.cs" />
+    <Compile Include="IGTAnalyzer.cs" />
     <Compile Include="LevelData.cs" />
     <Compile Include="LevelManager.cs" />
     <Compile Include="PropertyCache.cs" />

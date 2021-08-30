@@ -28,7 +28,6 @@ namespace TenSRR_RTA_AssistTool {
         private bool mProcessing = false;	// キャプチャしたデータの処理中フラグ
 
 		private VideoAnalyzer mVideoAnalyzer = new VideoAnalyzer();
-		private VideoGameState mVideoGameState = new VideoGameState();
 
 		public VideoChecker(Form1 form1) {
 			mForm1 = form1;
@@ -249,7 +248,7 @@ namespace TenSRR_RTA_AssistTool {
 
 				// ゲームの状態を分析して更新
 				bitmapPlus.BeginAccess();
-				UpdateGameState(bitmapPlus);
+				mVideoAnalyzer.UpdateGameState(bitmapPlus);
 				bitmapPlus.EndAccess();
 
 /*
@@ -274,14 +273,9 @@ namespace TenSRR_RTA_AssistTool {
 			}
 		}
 
-		private void UpdateGameState(FastBitmap bitmap)
-        {
-			mVideoGameState = mVideoAnalyzer.Detect(bitmap);
-		}
-
 		public VideoGameState GetVideoGameState()
         {
-			return mVideoGameState;
+			return mVideoAnalyzer.GetVideoGameState();
 		}
 
 	}
